@@ -1,17 +1,19 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const API_KEY = process.env.FOOTBALL_DATA_API_KEY;
 
 app.use(express.json());
-app.use(require('cors')());
+app.use(cors());
 
 // Route für Liga-Spiele
 app.get('/league-matches', async (req, res) => {
   const { key, season_id } = req.query;
   try {
-    const response = await axios.get(`https://api.football-data-api.com/league-matches`, {
+    const response = await axios.get('https://api.football-data-api.com/league-matches', {
       params: { key, season_id }
     });
     res.json(response.data);
@@ -25,7 +27,7 @@ app.get('/league-matches', async (req, res) => {
 app.get('/match', async (req, res) => {
   const { key, match_id } = req.query;
   try {
-    const response = await axios.get(`https://api.football-data-api.com/match`, {
+    const response = await axios.get('https://api.football-data-api.com/match', {
       params: { key, match_id }
     });
     res.json(response.data);
@@ -39,7 +41,7 @@ app.get('/match', async (req, res) => {
 app.get('/team', async (req, res) => {
   const { key, team_id } = req.query;
   try {
-    const response = await axios.get(`https://api.football-data-api.com/team`, {
+    const response = await axios.get('https://api.football-data-api.com/team', {
       params: { key, team_id }
     });
     res.json(response.data);
@@ -53,7 +55,7 @@ app.get('/team', async (req, res) => {
 app.get('/league-season', async (req, res) => {
   const { key, season_id } = req.query;
   try {
-    const response = await axios.get(`https://api.football-data-api.com/league-season`, {
+    const response = await axios.get('https://api.football-data-api.com/league-season', {
       params: { key, season_id }
     });
     res.json(response.data);
@@ -67,7 +69,7 @@ app.get('/league-season', async (req, res) => {
 app.get('/league-tables', async (req, res) => {
   const { key, season_id } = req.query;
   try {
-    const response = await axios.get(`https://api.football-data-api.com/league-tables`, {
+    const response = await axios.get('https://api.football-data-api.com/league-tables', {
       params: { key, season_id }
     });
     res.json(response.data);
@@ -78,5 +80,5 @@ app.get('/league-tables', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server läuft auf http://localhost:${PORT}`);
+  console.log(`Server läuft auf Port ${PORT}`);
 });
