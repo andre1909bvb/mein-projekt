@@ -6,9 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors({
-  origin: '*', // Dies erlaubt Anfragen von allen Ursprüngen. Anpassen für spezifische Ursprünge.
-}));
+app.use(cors());
 
 // Route für Liga-Spiele
 app.get('/league-matches', async (req, res) => {
@@ -83,3 +81,5 @@ app.get('/league-tables', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server läuft auf http://localhost:${PORT}`);
 });
+
+module.exports = app;
