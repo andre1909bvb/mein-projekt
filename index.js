@@ -37,10 +37,10 @@ app.get('/match', async (req, res) => {
 });
 
 // Route für Teamdaten
-app.get('/team', async (req, res) => {
+app.get('/lastx', async (req, res) => {
   const { key, team_id } = req.query;
   try {
-    const response = await axios.get(`https://api.football-data-api.com/team`, {
+    const response = await axios.get(`https://api.football-data-api.com/lastx`, {
       params: { key, team_id }
     });
     res.json(response.data);
