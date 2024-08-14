@@ -50,6 +50,19 @@ app.get('/lastx', async (req, res) => {
   }
 });
 
+app.get('/team', async (req, res) => {
+  const { key, team_id } = req.query;
+  try {
+    const response = await axios.get(`https://api.football-data-api.com/team`, {
+      params: { key, team_id }
+    });
+    res.json(response.data);
+  } catch (error) {
+    console.error('Fehler beim Abrufen der Teamdaten:', error);
+    res.status(500).send('Interner Serverfehler');
+  }
+});
+
 // Route für Ligasaison
 app.get('/league-season', async (req, res) => {
   const { key, season_id } = req.query;
